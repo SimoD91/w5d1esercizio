@@ -1,8 +1,11 @@
 package it.epicode.w5d1esercizio.bean;
 
 import lombok.*;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 @Getter
 @Setter
 @NoArgsConstructor

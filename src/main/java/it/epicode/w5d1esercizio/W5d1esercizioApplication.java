@@ -13,7 +13,7 @@ public class W5d1esercizioApplication {
 		SpringApplication.run(W5d1esercizioApplication.class, args);
 
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-		Menu menu = (Menu) ctx.getBean("listamenu");
+		Menu menu = (Menu) ctx.getBean("menu");
 		System.out.println(menu);
 	}
 }

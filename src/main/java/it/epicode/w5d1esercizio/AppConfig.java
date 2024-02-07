@@ -1,18 +1,20 @@
 package it.epicode.w5d1esercizio;
 
-import it.epicode.w5d1esercizio.bean.Bevanda;
-import it.epicode.w5d1esercizio.bean.Menu;
-import it.epicode.w5d1esercizio.bean.Pizza;
-import it.epicode.w5d1esercizio.bean.Toppings;
+import it.epicode.w5d1esercizio.bean.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class AppConfig {
+    private Logger logger = LoggerFactory.getLogger("w5d2p");
 
     @Bean("p1")
     @Scope("prototype")
@@ -101,9 +103,28 @@ public class AppConfig {
     }
 
 
-    @Bean("listamenu")
+    @Bean("menu")
     public Menu getListaMenu() {
+        logger.info("MENU");
     return new Menu(List.of(getPizza(), getPizza2(), getPizza3()),
             List.of(getCocaCola(), getFanta(), getSprite()), List.of(getFormaggio(), getFunghi(), getSalsiccia()));
+    }
+    @Bean("tavolo1")
+    public Table tavolo1(@Value("${tavolo1.coperto}") String coperto){
+        Table tavolo = new Table();
+        tavolo.setNumero(1);
+            tavolo.setTableState(TableState.LIBERO);
+        tavolo.setNumeroMaxCoperti(6);
+        tavolo.setCostoCoperto(Double.parseDouble(coperto));
+        return tavolo;
+    }
+    @Bean("tavolo2")
+    public Table tavolo2(@Value("${tavolo2.coperto}") String coperto){
+        Table tavolo = new Table();
+        tavolo.setNumero(2);
+        tavolo.setTableState(TableState.LIBERO);
+        tavolo.setNumeroMaxCoperti(8);
+        tavolo.setCostoCoperto(Double.parseDouble(coperto));
+        return tavolo;
     }
 }
