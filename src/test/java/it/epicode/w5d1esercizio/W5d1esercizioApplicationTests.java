@@ -43,12 +43,6 @@ class W5d2ApplicationTests {
 		Assertions.assertEquals("Funghi", p2.getToppings().get(0).getNomeTopping());
 	}
 
-	@ParameterizedTest
-	@CsvSource({"Formaggio", "Funghi", "Salsiccia"})
-	void testToppings(String nome) {
-		Toppings topping = ctx.getBean(nome.toLowerCase(), Toppings.class);
-		Assertions.assertNotNull(topping);
-	}
 
 	@Test
 	void testMenu() {
@@ -64,6 +58,13 @@ class W5d2ApplicationTests {
 		Table tavolo1 = ctx.getBean("tavolo1", Table.class);
 		Assertions.assertNotNull(tavolo1);
 		Assertions.assertEquals(1, tavolo1.getNumero());
+	}
+
+	@ParameterizedTest
+	@CsvSource({"Formaggio", "Funghi", "Salsiccia"})
+	void testToppings(String nome) {
+		Toppings topping = ctx.getBean(nome, Toppings.class);
+		Assertions.assertNotNull(topping);
 	}
 
 	@AfterAll
